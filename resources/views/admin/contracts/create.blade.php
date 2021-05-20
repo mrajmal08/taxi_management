@@ -58,6 +58,16 @@
                 @endif
                
             </div>
+            <div class="form-group {{ $errors->has('pay_per_day') ? 'has-error' : '' }}">
+                <label for="pay_per_day">{{ trans('cruds.contracts.fields.pay_per_day') }}*</label>
+                <input type="text" id="pay_per_day" name="pay_per_day" class="form-control" value="{{ old('pay_per_day', isset($contract) ? $contract->pay_per_day : '') }}" required>
+                @if($errors->has('pay_per_day'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('pay_per_day') }}
+                    </em>
+                @endif
+               
+            </div>
              <div class="form-group {{ $errors->has('vat_amount') ? 'has-error' : '' }}">
                 <label for="vat_amount">{{ trans('cruds.contracts.fields.vat_amount') }}*</label>
                 <input type="text" id="vat_amount" name="vat_amount" class="form-control" value="{{ old('vat_amount', isset($contract) ? $contract->vat_amount : '') }}" required>

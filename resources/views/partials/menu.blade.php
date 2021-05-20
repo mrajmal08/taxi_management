@@ -80,6 +80,24 @@
                                 {{ trans('cruds.areas.title') }}
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link{{ request()->is('admin/badges/*') ? ' active' : '' }}" href="{{ route('admin.badges.index') }}">
+                                <i class="fa-fw fas fa-id-badge nav-icon">
+
+                                </i>
+
+                                {{ trans('cruds.badges.title') }}
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link{{ request()->is('admin/insurances/*') ? ' active' : '' }}" href="{{ route('admin.insurances.index') }}">
+                                <i class="fa-fw fas fa-automobile nav-icon">
+
+                                </i>
+
+                                {{ trans('cruds.insurances.title') }}
+                            </a>
+                        </li>
 
                     </ul>
             </li>

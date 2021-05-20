@@ -43,4 +43,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Drivers
     Route::delete('drivers/destroy', 'DriverController@massDestroy')->name('drivers.massDestroy');
     Route::resource('drivers', 'DriverController');
+
+    // Badges
+    Route::delete('badges/destroy', 'BadgeController@massDestroy')->name('badges.massDestroy');
+    Route::resource('badges', 'BadgeController');
+
+    // insurances
+    Route::delete('insurances/destroy', 'InsuranceController@massDestroy')->name('insurances.massDestroy');
+    Route::resource('insurances', 'InsuranceController');
 });

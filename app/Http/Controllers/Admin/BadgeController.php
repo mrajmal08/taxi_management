@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Driver;
-use App\Insurance;
-use App\ExpenseCategory;
-use App\Http\Requests\MassDestroyDriverRequest;
+use App\Http\Requests\MassDestroyBadgeRequest;
+use App\Badge;
 
-class DriverController extends Controller
+class BadgeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,9 @@ class DriverController extends Controller
      */
     public function index()
     {
-        $drivers    = Driver::with('car')->get();
-        return view('admin.Drivers.index', compact('drivers'));
+        $badges = Badge::all();
+
+        return view('admin.badge.index', compact('badges'));
     }
 
     /**
@@ -29,9 +28,7 @@ class DriverController extends Controller
      */
     public function create()
     {
-        $insurances = Insurance::all();
-        $categories = ExpenseCategory::all();
-        return view('admin.Drivers.create',compact('categories','insurances'));
+        return view('admin.badge.create');
     }
 
     /**
@@ -42,9 +39,9 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        Driver::create($request->all());
-        notify()->success('Driver created');
-        return redirect()->route('admin.drivers.index');
+        $badge = Badge::create($request->all());
+        notify()->success('Badge created');
+        return redirect()->route('admin.badges.index');
     }
 
     /**
@@ -55,7 +52,7 @@ class DriverController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -66,11 +63,8 @@ class DriverController extends Controller
      */
     public function edit($id)
     {
-        $driver = Driver::with('car')->where('id',$id)->first();
-        $categories = ExpenseCategory::all();
-        $insurances = Insurance::all();
-        return view('admin.Drivers.edit',compact('categories','driver','insurances'));
-
+        $badge = Badge::where('id',$id)->first();
+        return view('admin.badge.edit', compact('badge'));
     }
 
     /**
@@ -82,10 +76,10 @@ class DriverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $driver = Driver::find($id);
-        $driver->update($request->all());
-        notify()->success('Driver updated');
-        return redirect()->route('admin.drivers.index');
+        $badge = Badge::find($id);
+        $badge->update($request->all());
+        notify()->success('Badge updated');
+        return redirect()->route('admin.badges.index');
     }
 
     /**
@@ -96,16 +90,17 @@ class DriverController extends Controller
      */
     public function destroy($id)
     {
-        $driver = Driver::find($id);
-        $driver->delete();
-        notify()->success('Driver deleted');
+        notify()->success('Badge deleted');
+        $badge = Badge::find($id);
+        $badge->delete();
+
         return back();
     }
 
-     public function massDestroy(MassDestroyDriverRequest $request)
+    public function massDestroy(MassDestroyBadgeRequest $request)
     {
-        Driver::whereIn('id', request('ids'))->delete();
-        notify()->success('Drivers deleted');
+        Badge::whereIn('id', request('ids'))->delete();
+        notify()->success('Badges deleted');
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

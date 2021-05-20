@@ -23,6 +23,7 @@ class Contract extends Model
         'finish',
         'driver',
         'cost_per_day',
+        'pay_per_day',
         'vat_amount',
         'created_at',
         'updated_at'
