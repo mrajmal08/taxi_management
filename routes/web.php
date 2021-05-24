@@ -51,4 +51,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // insurances
     Route::delete('insurances/destroy', 'InsuranceController@massDestroy')->name('insurances.massDestroy');
     Route::resource('insurances', 'InsuranceController');
+
+    // Daily Entry
+    Route::delete('entries/destroy', 'DailyEntryController@massDestroy')->name('entries.massDestroy');
+    Route::resource('entries', 'DailyEntryController');
+
+    // Holidays
+    Route::delete('holidays/destroy', 'HolidayController@massDestroy')->name('holidays.massDestroy');
+    Route::resource('holidays', 'HolidayController');
+
+    // Suppliers
+    Route::delete('suppliers/destroy', 'SupplierController@massDestroy')->name('suppliers.massDestroy');
+    Route::resource('suppliers', 'SupplierController');
+
+    // Expensis
+    Route::delete('expenses/destroy', 'ExpenseController@massDestroy')->name('expenses.massDestroy');
+    Route::resource('expenses', 'ExpenseController');
+
+    // Maintenances
+    Route::delete('maintenances/destroy', 'MaintenanceController@massDestroy')->name('maintenances.massDestroy');
+    Route::resource('maintenances', 'MaintenanceController');
 });

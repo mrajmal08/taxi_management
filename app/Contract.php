@@ -41,6 +41,6 @@ class Contract extends Model
 
     public function drivers()
     {
-        return $this->belongsTo(driver::class, 'driver');
+        return $this->belongsTo(Driver::class, 'driver');
     }
 }

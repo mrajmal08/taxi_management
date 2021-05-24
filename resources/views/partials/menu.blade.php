@@ -98,6 +98,24 @@
                                 {{ trans('cruds.insurances.title') }}
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link{{ request()->is('admin/holidays/*') ? ' active' : '' }}" href="{{ route('admin.holidays.index') }}">
+                                <i class="fa-fw fas fa-list nav-icon">
+
+                                </i>
+
+                                {{ trans('cruds.holidays.title') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link{{ request()->is('admin/suppliers/*') ? ' active' : '' }}" href="{{ route('admin.suppliers.index') }}">
+                                <i class="fa-fw fas fa-industry nav-icon">
+
+                                </i>
+
+                                {{ trans('cruds.suppliers.title') }}
+                            </a>
+                        </li>
 
                     </ul>
             </li>
@@ -130,7 +148,33 @@
                     {{ trans('cruds.contracts.title') }}
                 </a>
             </li> 
+            <li class="nav-item">
+                <a class="nav-link{{ request()->is('admin/entries*') ? ' active' : '' }}" href="{{ route('admin.entries.index') }}">
+                    <i class="fa-fw fas fa-history nav-icon">
 
+                    </i>
+
+                    {{ trans('cruds.entries.title') }}
+                </a>
+            </li> 
+            <li class="nav-item">
+                <a class="nav-link{{ request()->is('admin/expenses*') ? ' active' : '' }}" href="{{ route('admin.expenses.index') }}">
+                    <i class="fa-fw fas fa-money nav-icon">
+
+                    </i>
+
+                    {{ trans('cruds.expenses.title') }}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link{{ request()->is('admin/maintenances*') ? ' active' : '' }}" href="{{ route('admin.maintenances.index') }}">
+                    <i class="fa-fw fas fa-car nav-icon">
+
+                    </i>
+
+                    {{ trans('cruds.maintenances.title') }}
+                </a>
+            </li> 
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">

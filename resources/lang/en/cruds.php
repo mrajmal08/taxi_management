@@ -209,4 +209,60 @@ return [
             'name'              => 'Company name',
         ]
     ],
+    'entries'    => [
+        'title'          => 'Daily Entries',
+        'title_singular' => 'Daily Entry',
+        'fields' => [
+            'id' => 'ID',
+            'driver' => 'Driver',
+            'date'   => 'Date',
+            'status' => 'Work Status'
+        ]
+    ],
+    'holidays'    => [
+        'title'          => 'Holiday Types',
+        'title_singular' => 'Holiday Type',
+        'fields' => [
+            'id' => 'ID',
+            'type'   => 'Holiday Type'
+        ]
+    ],
+    'suppliers'    => [
+        'title'          => 'Suppliers',
+        'title_singular' => 'Supplier',
+        'fields' => [
+            'id' => 'ID',
+            'name'   => 'Supplier Name'
+        ]
+    ],
+    'expenses'    => [
+        'title'          => 'Company Expenses',
+        'title_singular' => 'Company Expense',
+        'fields' => [
+            'id' => 'ID',
+            'date'              => 'Expense Date',
+            'supplier'          => 'Supplier',
+            'discription'       => 'Discription',
+            'sub_total'         => 'Sub Total',
+            'vat'               => 'Vat',
+            'paymnet_method'    => 'Payment Method',
+            'paymnet_reference' => 'Payment Reference',
+        ]
+    ],
+    'maintenances'    => [
+        'title'          => 'Vehicle Maintenances',
+        'title_singular' => 'Vehicle Maintenance',
+        'fields' => [
+            'id'                => 'ID',
+            'date'              => 'Maintenance Date',
+            'supplier'          => 'Supplier',
+            'vehicle_reg'       => 'Vehicle Reg',
+            'plate_no'          => 'Plate No',
+            'millage'           => 'Millage',
+            'cost'              => 'Cost',
+            'vat'               => 'VAT',
+            'total'             => 'Total',
+
+        ]
+    ],
 ];
