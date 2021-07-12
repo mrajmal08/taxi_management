@@ -33,6 +33,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.entries.fields.status') }}
+                        </th> 
+                        <th>
+                            {{ trans('cruds.entries.fields.route') }}
                         </th>
                         <th>
                             &nbsp;
@@ -56,6 +59,9 @@
                             </td>
                             <td>
                                 {{ $entry->holiday['holiday_type'] ?? '' }}
+                            </td> 
+                            <td>
+                                {{ $entry->route['route_id'] ?? '' }}
                             </td>
                             <td>
                               

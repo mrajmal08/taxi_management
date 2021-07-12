@@ -11,7 +11,7 @@
             @csrf
             <div class="form-group {{ $errors->has('driver') ? 'has-error' : '' }}">
                 <label for="driver">{{ trans('cruds.entries.fields.driver') }}*</label>
-                 <select class="select2{{ $errors->has('driver_id') ? ' is-invalid' : '' }}" name="driver_id" id="driver_id" >
+                 <select class="from-control select2{{ $errors->has('driver_id') ? ' is-invalid' : '' }}" name="driver_id" id="driver_id" >
                         @foreach($drivers as $driver)
                             <option value="{{$driver->id}}">{{$driver->name}}</option>
                         @endforeach
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                 <label for="status">{{ trans('cruds.entries.fields.status') }}*</label>
-                <select class="select2{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" >
+                <select class="form-control select2{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" >
                         @foreach($types as $type)
                             <option value="{{$type->id}}">{{$type->holiday_type}}</option>
                         @endforeach
@@ -41,6 +41,20 @@
                 @if($errors->has('type'))
                     <em class="invalid-feedback">
                         {{ $errors->first('type') }}
+                    </em>
+                @endif
+            </div>
+            
+            <div class="form-group {{ $errors->has('route_id') ? 'has-error' : '' }}">
+                <label for="status">{{ trans('cruds.entries.fields.route') }}*</label>
+                <select class="form-control select2{{ $errors->has('route_id') ? ' is-invalid' : '' }}" name="route_id" id="type" >
+                        @foreach($routes as $route)
+                            <option value="{{$route->id}}">{{$route->route_id}}</option>
+                        @endforeach
+                </select>
+                @if($errors->has('route_id'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('route_id') }}
                     </em>
                 @endif
             </div>

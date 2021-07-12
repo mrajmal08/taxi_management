@@ -45,6 +45,19 @@
                     </em>
                 @endif
             </div>
+            <div class="form-group {{ $errors->has('route_id') ? 'has-error' : '' }}">
+                <label for="status">{{ trans('cruds.entries.fields.route') }}*</label>
+                <select class="form-control select2{{ $errors->has('route_id') ? ' is-invalid' : '' }}" name="route_id" id="type" >
+                        @foreach($routes as $route)
+                            <option @if($entry->route_id == $route->id) selected="selected" @endif value="{{$route->id}}">{{$route->route_id}}</option>
+                        @endforeach
+                </select>
+                @if($errors->has('route_id'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('route_id') }}
+                    </em>
+                @endif
+            </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

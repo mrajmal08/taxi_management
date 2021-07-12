@@ -20,6 +20,7 @@ class DailyEntry extends Model
         'driver_id',
         'work_date',
         'type',
+        'route_id',
         'created_at',
         'updated_at'
     ];
@@ -32,5 +33,10 @@ class DailyEntry extends Model
     public function holiday()
     {
         return $this->belongsTo(Holiday::class, 'type');
+    }
+
+     public function route()
+    {
+        return $this->belongsTo(Route::class, 'route_id');
     }
 }

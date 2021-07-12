@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\DailyEntry;
 use App\Holiday;
 use App\Driver;
+use App\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class DailyEntryController extends Controller
@@ -19,7 +20,7 @@ class DailyEntryController extends Controller
      */
     public function index()
     {
-        $entries = DailyEntry::with(['driver','holiday'])->get();
+        $entries = DailyEntry::with(['driver','holiday','route'])->get();
 
         return view('admin.daily.index', compact('entries'));
     }
@@ -33,8 +34,8 @@ class DailyEntryController extends Controller
     {
         $drivers = Driver::all();
         $types   = Holiday::all();
-        
-        return view('admin.daily.create',compact('drivers','types'));
+        $routes  = Route::all();
+        return view('admin.daily.create',compact('drivers','types','routes'));
     }
 
     /**
@@ -72,8 +73,8 @@ class DailyEntryController extends Controller
         $entry   = DailyEntry::where('id',$id)->first();
         $drivers = Driver::all();
         $types   = Holiday::all();
-        
-        return view('admin.daily.edit',compact('entry','drivers','types'));
+        $routes  = Route::all();
+        return view('admin.daily.edit',compact('entry','drivers','types','routes'));
     }
 
     /**

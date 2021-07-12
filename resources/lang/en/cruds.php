@@ -232,6 +232,7 @@ return [
         'fields' => [
             'id' => 'ID',
             'driver' => 'Driver',
+            'route'  => 'Route',
             'date'   => 'Date',
             'status' => 'Work Status'
         ]
