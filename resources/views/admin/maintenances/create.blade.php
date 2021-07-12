@@ -20,7 +20,7 @@
             </div>
             <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
                 <label for="vehicle">{{ trans('cruds.maintenances.fields.vehicle') }}*</label>
-                <select class="select2{{ $errors->has('vehicle') ? ' is-invalid' : '' }}" name="vehicle_id" id="maintenance" >
+                <select class="form-control select2{{ $errors->has('vehicle') ? ' is-invalid' : '' }}" name="vehicle_id" id="maintenance" >
                         @foreach($vehicles as $vehicle)
                             <option value="{{$vehicle->id}}">{{$vehicle->name}}</option>
                         @endforeach
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group {{ $errors->has('supplier') ? 'has-error' : '' }}">
                 <label for="supplier">{{ trans('cruds.maintenances.fields.supplier') }}*</label>
-                <select class="select2{{ $errors->has('supplier') ? ' is-invalid' : '' }}" name="supplier" id="maintenance" >
+                <select class="form-control select2{{ $errors->has('supplier') ? ' is-invalid' : '' }}" name="supplier" id="maintenance" >
                         @foreach($suppliers as $supplier)
                             <option value="{{$supplier->id}}">{{$supplier->name}}</option>
                         @endforeach
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group {{ $errors->has('maintainer') ? 'has-error' : '' }}">
                 <label for="maintainer">{{ trans('cruds.maintenances.fields.maintainer') }}*</label>
-                <select class="select2{{ $errors->has('maintainer') ? ' is-invalid' : '' }}" name="maintenance_by" id="maintenance" >
+                <select class="form-control select2{{ $errors->has('maintainer') ? ' is-invalid' : '' }}" name="maintenance_by" id="maintenance" >
                         @foreach($maintainers as $maintainer)
                             <option value="{{$maintainer->id}}">{{$maintainer->name}}</option>
                         @endforeach
