@@ -52,16 +52,7 @@
                         System Management
                     </a>
                     <ul class="nav-dropdown-items">
-                        @can('expense_category_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.categories.index") }}" class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}">
-                                    <i class="fa-fw fas fa-list nav-icon">
 
-                                    </i>
-                                    {{ trans('cruds.expenseCategory.title') }}
-                                </a>
-                            </li>
-                        @endcan
                         <li class="nav-item">
                             <a class="nav-link{{ request()->is('admin/routes*') ? ' active' : '' }}" href="{{ route('admin.routes.index') }}">
                                 <i class="fa-fw fas fa-route nav-icon">
@@ -69,6 +60,15 @@
                                 </i>
 
                                 {{ trans('cruds.routes.title') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link{{ request()->is('admin/maintainers*') ? ' active' : '' }}" href="{{ route('admin.maintainers.index') }}">
+                                <i class="fa-fw fas fa-cog nav-icon">
+
+                                </i>
+
+                                {{ trans('cruds.maintainers.title') }}
                             </a>
                         </li>
                         <li class="nav-item">
@@ -119,7 +119,16 @@
 
                     </ul>
             </li>
-             
+             @can('expense_category_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.categories.index") }}" class="nav-link {{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-car nav-icon">
+
+                        </i>
+                        {{ trans('cruds.vehicle.title') }}
+                    </a>
+                </li>
+            @endcan
              <li class="nav-item">
                 <a class="nav-link{{ request()->is('admin/drivers*') ? ' active' : '' }}" href="{{ route('admin.drivers.index') }}">
                     <i class="fa-fw fas fa-user nav-icon">

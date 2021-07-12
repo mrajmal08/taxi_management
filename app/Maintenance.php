@@ -19,11 +19,14 @@ class Maintenance extends Model
     protected $fillable = [
         'entry_date',
         'supplier',
-        'vehicle_reg',
-        'plate_no',
+        'vehicle_id',
+        'labor_cost',
+        'labor_vat',
         'millage',
         'cost',
         'vat',
+        'maintenance_by',
+        'description',
         'created_at',
         'updated_at'
     ];
@@ -31,6 +34,16 @@ class Maintenance extends Model
     public function suppliers()
     {
         return $this->belongsTo(Supplier::class, 'supplier');
+    }
+
+    public function maintain()
+    {
+        return $this->belongsTo(Maintainer::class, 'maintenance_by');
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id');
     }
 
 }

@@ -109,7 +109,7 @@ return [
             'deleted_at_helper'        => '',
         ],
     ],
-    'expenseCategory'   => [
+    'vehicle'   => [
         'title'          => 'Vehicles',
         'title_singular' => 'Vehicle',
         'fields'         => [
@@ -117,6 +117,14 @@ return [
             'id_helper'         => '',
             'name'              => 'Name',
             'name_helper'       => '',
+            'vehicle_reg'       => 'Vehicle Reg',
+            'plate_no'          => 'Plate No',
+            'plate_no_expiry'   => 'Plate No Expiry',
+            'mot'               => 'Mot',
+            'mot_expiry'        => 'Mot Expiry',
+            'insurance_company' => 'Insurance Company',
+            'insurance_company_expiry'       => 'Insurance Company Expiry',
+            'plate_issue_authority' => 'Plate Issue Authority',
             'created_at'        => 'Created at',
             'created_at_helper' => '',
             'updated_at'        => 'Updated At',
@@ -209,6 +217,15 @@ return [
             'name'              => 'Company name',
         ]
     ],
+    'maintainers'         => [
+        'title'          => 'Maintainers',
+        'title_singular' => 'Maintainer',
+        'fields'         => [   
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'name'              => 'Maintainer company name',
+        ]
+    ],
     'entries'    => [
         'title'          => 'Daily Entries',
         'title_singular' => 'Daily Entry',
@@ -256,12 +273,16 @@ return [
             'id'                => 'ID',
             'date'              => 'Maintenance Date',
             'supplier'          => 'Supplier',
+            'maintainer'        => 'Maintainer',
             'vehicle_reg'       => 'Vehicle Reg',
             'plate_no'          => 'Plate No',
             'millage'           => 'Millage',
-            'cost'              => 'Cost',
-            'vat'               => 'VAT',
-            'total'             => 'Total',
+            'cost'              => 'Parts Cost',
+            'vat'               => 'Parts VAT',
+            'la_cost'           => 'Labor Cost',
+            'la_vat'            => 'Labor VAT',
+            'vehicle'           => 'Vehicle',
+            'description'       => 'Description'
 
         ]
     ],

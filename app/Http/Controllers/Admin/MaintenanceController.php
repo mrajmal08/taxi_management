@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Supplier;
 use App\Maintenance;
+use App\Maintainer;
+use App\Vehicle;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyMaintenanceRequest;
 use Illuminate\Http\Request;
@@ -18,7 +20,7 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        $maintenances = Maintenance::with('suppliers')->get();
+        $maintenances = Maintenance::with(['suppliers','maintain','vehicle'])->get();
 
         return view('admin.maintenances.index', compact('maintenances'));
     }
@@ -31,7 +33,9 @@ class MaintenanceController extends Controller
     public function create()
     {
         $suppliers = Supplier::all();
-        return view('admin.maintenances.create',compact('suppliers'));
+        $maintainers = Maintainer::all();
+        $vehicles = Vehicle::all();
+        return view('admin.maintenances.create',compact('suppliers','vehicles','maintainers'));
     }
 
     /**
@@ -67,8 +71,10 @@ class MaintenanceController extends Controller
     public function edit($id)
     {
         $maintenance   = Maintenance::where('id',$id)->first();
-        $suppliers     = Supplier::all();
-        return view('admin.maintenances.edit', compact('maintenance','suppliers'));
+        $suppliers = Supplier::all();
+        $maintainers = Maintainer::all();
+        $vehicles = Vehicle::all();
+        return view('admin.maintenances.edit', compact('maintenance','suppliers','maintainers','vehicles'));
     }
 
     /**

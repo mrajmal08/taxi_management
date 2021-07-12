@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\ExpenseCategory;
+use App\Vehicle;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class MassDestroyExpenseCategoryRequest extends FormRequest
+class MassDestroyVehicleRequest extends FormRequest
 {
     public function authorize()
     {

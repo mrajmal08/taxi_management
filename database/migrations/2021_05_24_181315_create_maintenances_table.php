@@ -16,12 +16,15 @@ class CreateMaintenancesTable extends Migration
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
             $table->string('entry_date');
-            $table->string('vehicle_reg');
+            $table->string('vehicle_id');
             $table->string('supplier');
-            $table->string('plate_no');
-            $table->string('millage');
             $table->string('cost');
             $table->string('vat');
+            $table->string('labor_vat');
+            $table->string('labor_cost');
+            $table->string('millage');
+            $table->string('maintenance_by');
+            $table->string('description');
             $table->timestamps();
         });
     }
