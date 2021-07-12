@@ -12,7 +12,7 @@
             @method('PUT')
             <div class="form-group {{ $errors->has('driver') ? 'has-error' : '' }}">
                 <label for="driver">{{ trans('cruds.entries.fields.driver') }}*</label>
-                 <select class="select2{{ $errors->has('driver_id') ? ' is-invalid' : '' }}" name="driver_id" id="driver_id" >
+                 <select class="form-control select2{{ $errors->has('driver_id') ? ' is-invalid' : '' }}" name="driver_id" id="driver_id" >
                         @foreach($drivers as $driver)
                             <option @if($entry->driver_id == $driver->id) selected="selected" @endif value="{{$driver->id}}">{{$driver->name}}</option>
                         @endforeach
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
                 <label for="status">{{ trans('cruds.entries.fields.status') }}*</label>
-                <select class="select2{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" >
+                <select class="form-control select2{{ $errors->has('type') ? ' is-invalid' : '' }}" name="type" id="type" >
                         @foreach($types as $type)
                             <option @if($entry->type == $type) selected="selected" @endif value="{{$type->id}}">{{$type->holiday_type}}</option>
                         @endforeach
