@@ -4,14 +4,14 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route("admin.categories.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.expenseCategory.title_singular') }}
+                {{ trans('global.add') }} {{ trans('cruds.vehicle.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.expenseCategory.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.vehicle.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
@@ -23,10 +23,34 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.expenseCategory.fields.id') }}
+                            {{ trans('cruds.vehicle.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.expenseCategory.fields.name') }}
+                            {{ trans('cruds.vehicle.fields.name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.mot') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.mot_expiry') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.plate_no') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.plate_no_expiry') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.vehicle_reg') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.insurance_company') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.insurance_company_expiry') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.plate_issue_authority') }}
                         </th>
                         <th>
                             &nbsp;
@@ -34,32 +58,65 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($expenseCategories as $key => $expenseCategory)
-                        <tr data-entry-id="{{ $expenseCategory->id }}">
+                    @foreach($expenseCategories as $key => $vehicle)
+                        <tr data-entry-id="{{ $vehicle->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $expenseCategory->id ?? '' }}
+                                {{ $vehicle->id ?? '' }}
                             </td>
                             <td>
-                                {{ $expenseCategory->name ?? '' }}
+                                {{ $vehicle->name ?? '' }}
                             </td>
                             <td>
-                                @can('expense_category_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.categories.show', $expenseCategory->id) }}">
+                                @if($vehicle->mot != null)
+                               <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->mot)}}')">View</a>
+                               @else
+                                 Not available
+                                @endif
+                            </td>
+                            <td>
+                                {{ $vehicle->mot_expiry ?? '' }}
+                            </td>
+                            <td>
+                                {{ $vehicle->plate_no ?? '' }}
+                            </td>
+                            <td>
+                                {{ $vehicle->plate_no_expiry ?? '' }}
+                            </td>
+                            <td>
+                                {{ $vehicle->vehicle_reg ?? '' }}
+                            </td>
+                            <td>
+                                {{ $vehicle->insurance_company ?? '' }}
+                            </td>
+                            <td>
+                                {{ $vehicle->insurance_company_expiry ?? '' }}
+                            </td>
+                            <td>
+                                @if($vehicle->plate_issue_authority != null) 
+                                <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->plate_issue_authority)}}')">View</a>
+                                @else
+                                 Not available
+                                @endif
+                                
+                            </td>
+                            <td>
+                               <!--  @can('expense_category_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.categories.show', $vehicle->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
-                                @endcan
+                                @endcan -->
 
                                 @can('expense_category_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.categories.edit', $expenseCategory->id) }}">
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.categories.edit', $vehicle->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
                                 @can('expense_category_delete')
-                                    <form action="{{ route('admin.categories.destroy', $expenseCategory->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('admin.categories.destroy', $vehicle->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -81,6 +138,17 @@
 @section('scripts')
 @parent
 <script>
+    function show_my_file(file) {
+         
+         // open the page as popup //
+         var page = file;
+         var myWindow = window.open(page, "_blank", "scrollbars=yes,width=400,height=500,top=300");
+         
+         // focus on the popup //
+         myWindow.focus();
+         
+        
+       }
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
 @can('expense_category_delete')

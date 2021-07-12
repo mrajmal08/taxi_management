@@ -49,6 +49,6 @@ class Driver extends Model
 
     public function car()
     {
-        return $this->belongsTo(ExpenseCategory::class, 'car_type');
+        return $this->belongsTo(Vehicle::class, 'car_type');
     }
 }

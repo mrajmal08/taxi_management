@@ -32,10 +32,10 @@
                             {{ trans('cruds.maintenances.fields.supplier') }}
                         </th>
                         <th>
-                            {{ trans('cruds.maintenances.fields.vehicle_reg') }}
+                            {{ trans('cruds.maintenances.fields.vehicle') }}
                         </th>
                         <th>
-                            {{ trans('cruds.maintenances.fields.plate_no') }}
+                            {{ trans('cruds.maintenances.fields.maintainer') }}
                         </th>
                         <th>
                             {{ trans('cruds.maintenances.fields.millage') }}
@@ -47,7 +47,10 @@
                             {{ trans('cruds.maintenances.fields.vat') }}
                         </th>
                         <th>
-                            {{ trans('cruds.maintenances.fields.total') }}
+                            {{ trans('cruds.maintenances.fields.la_cost') }}
+                        </th> 
+                        <th>
+                            {{ trans('cruds.maintenances.fields.la_vat') }}
                         </th>
                         <th>
                             &nbsp;
@@ -70,10 +73,10 @@
                                 {{ $maintenance->suppliers['name'] ?? '' }}
                             </td>
                             <td>
-                                {{ $maintenance->vehicle_reg ?? '' }}
+                                {{ $maintenance->vehicle['name'] ?? '' }}
                             </td>
                             <td>
-                                {{ $maintenance->plate_no ?? '' }}
+                                {{ $maintenance->maintain['name'] ?? '' }}
                             </td>
                             <td>
                                 {{ $maintenance->millage ?? '' }}
@@ -85,11 +88,10 @@
                                 {{ $maintenance->vat ?? 0 }}
                             </td>
                             <td>
-                                <?php
-
-                                    $total = ($maintenance->cost ?? 0) + ($maintenance->vat ?? 0);
-                                 ?>
-                                {{ $total }}
+                                {{ $maintenance->labor_cost ?? 0 }}
+                            </td>
+                            <td>
+                                {{ $maintenance->labor_vat ?? 0 }}
                             </td>
                             <td>
                               

@@ -19,11 +19,24 @@
                     </em>
                 @endif
             </div>
+            <div class="form-group {{ $errors->has('vehicle') ? 'has-error' : '' }}">
+                <label for="vehicle">{{ trans('cruds.maintenances.fields.vehicle') }}*</label>
+                <select class="select2{{ $errors->has('vehicle') ? ' is-invalid' : '' }}" name="vehicle_id" id="maintenance" >
+                        @foreach($vehicles as $vehicle)
+                            <option value="{{$vehicle->id}}" @if($vehicle->id == $maintenance->vehicle_id)selected="selected"@endif>{{$vehicle->name}}</option>
+                        @endforeach
+                </select>
+                @if($errors->has('vehicle'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('vehicle') }}
+                    </em>
+                @endif
+            </div>
             <div class="form-group {{ $errors->has('supplier') ? 'has-error' : '' }}">
                 <label for="supplier">{{ trans('cruds.maintenances.fields.supplier') }}*</label>
                 <select class="select2{{ $errors->has('supplier') ? ' is-invalid' : '' }}" name="supplier" id="maintenance" >
                         @foreach($suppliers as $supplier)
-                            <option @if($maintenance->id == $supplier->id) selected="selected" @endif value="{{$supplier->id}}">{{$supplier->name}}</option>
+                            <option value="{{$supplier->id}}" @if($supplier->id == $maintenance->supplier)selected="selected"@endif>{{$supplier->name}}</option>
                         @endforeach
                 </select>
                 @if($errors->has('supplier'))
@@ -32,24 +45,20 @@
                     </em>
                 @endif
             </div>
-            <div class="form-group {{ $errors->has('vehicle_reg') ? 'has-error' : '' }}">
-                <label for="vehicle_reg">{{ trans('cruds.maintenances.fields.vehicle_reg') }}*</label>
-                  <input type="text" id="vehicle_reg" name="vehicle_reg" class="form-control" value="{{ old('vehicle_reg', isset($maintenance) ? $maintenance->vehicle_reg : '') }}" required>
-                @if($errors->has('vehicle_reg'))
+            <div class="form-group {{ $errors->has('maintainer') ? 'has-error' : '' }}">
+                <label for="maintainer">{{ trans('cruds.maintenances.fields.maintainer') }}*</label>
+                <select class="select2{{ $errors->has('maintainer') ? ' is-invalid' : '' }}" name="maintenance_by" id="maintenance" >
+                        @foreach($maintainers as $maintainer)
+                            <option value="{{$maintainer->id}}"  @if($maintainer->id == $maintenance->maintenance_by)selected="selected"@endif>{{$maintainer->name}}</option>
+                        @endforeach
+                </select>
+                @if($errors->has('maintainer'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('vehicle_reg') }}
+                        {{ $errors->first('maintainer') }}
                     </em>
                 @endif
             </div>
-            <div class="form-group {{ $errors->has('plate_no') ? 'has-error' : '' }}">
-                <label for="plate_no">{{ trans('cruds.maintenances.fields.plate_no') }}*</label>
-                  <input type="text" id="plate_no" name="plate_no" class="form-control" value="{{ old('plate_no', isset($maintenance) ? $maintenance->plate_no : '') }}" required>
-                @if($errors->has('plate_no'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('plate_no') }}
-                    </em>
-                @endif
-            </div>
+           
             <div class="form-group {{ $errors->has('millage') ? 'has-error' : '' }}">
                 <label for="millage">{{ trans('cruds.maintenances.fields.millage') }}*</label>
                   <input type="text" id="millage" name="millage" class="form-control" value="{{ old('millage', isset($maintenance) ? $maintenance->millage : '') }}" required>
@@ -74,6 +83,33 @@
                 @if($errors->has('vat'))
                     <em class="invalid-feedback">
                         {{ $errors->first('vat') }}
+                    </em>
+                @endif
+            </div>
+            <div class="form-group {{ $errors->has('la_cost') ? 'has-error' : '' }}">
+                <label for="la_cost">{{ trans('cruds.maintenances.fields.la_cost') }}</label>
+                  <input type="number" id="labor_cost" name="labor_cost" class="form-control" value="{{ old('labor_cost', isset($maintenance) ? $maintenance->labor_cost : '') }}">
+                @if($errors->has('labor_cost'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('labor_cost') }}
+                    </em>
+                @endif
+            </div>
+            <div class="form-group {{ $errors->has('la_vat') ? 'has-error' : '' }}">
+                <label for="la_vat">{{ trans('cruds.maintenances.fields.la_vat') }}</label>
+                  <input type="number" id="labor_vat" name="labor_vat" class="form-control" value="{{ old('labor_vat', isset($maintenance) ? $maintenance->labor_vat : '') }}">
+                @if($errors->has('labor_vat'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('labor_vat') }}
+                    </em>
+                @endif
+            </div>
+            <div class="form-group {{ $errors->has('deccription') ? 'has-error' : '' }}">
+                <label for="description">{{ trans('cruds.maintenances.fields.description') }}</label>
+                 <textarea name="description" class="form-control">{{$maintenance->description}}</textarea>
+                @if($errors->has('description'))
+                    <em class="invalid-feedback"
+                        {{ $errors->first('description') }}
                     </em>
                 @endif
             </div>

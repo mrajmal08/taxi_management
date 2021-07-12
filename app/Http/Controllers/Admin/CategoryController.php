@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ExpenseCategory;
+use App\Vehicle;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyExpenseCategoryRequest;
-use App\Http\Requests\StoreExpenseCategoryRequest;
-use App\Http\Requests\UpdateExpenseCategoryRequest;
+use App\Http\Requests\MassDestroyVehicleRequest;
+use App\Http\Requests\StoreVehicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 use Gate;
-use Illuminate\Http\Request;
+use Request;
 use Symfony\Component\HttpFoundation\Response;
+
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,7 @@ class CategoryController extends Controller
     {
         abort_if(Gate::denies('expense_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $expenseCategories = ExpenseCategory::all();
+        $expenseCategories = Vehicle::all();
 
         return view('admin.Categories.index', compact('expenseCategories'));
     }
@@ -29,30 +30,111 @@ class CategoryController extends Controller
         return view('admin.Categories.create');
     }
 
-    public function store(StoreExpenseCategoryRequest $request)
+    public function store(StoreVehicleRequest $request)
     {
-        $expenseCategory = ExpenseCategory::create($request->all());
+         $request->validate([
+            'mot_file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048',
+            'plate_issue_authority_file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
+            ]);
+        
+        if($request->file()) {
+
+            if($request->mot_file){
+                $name = time().'.'.$request->mot_file->extension();
+
+                $filePath = $request->file('mot_file')->storeAs('uploads', $name, 'public');
+                
+                $request->mot_file = time().'.'.$request->mot_file->extension();
+                
+                $request['mot'] =  $filePath;
+            }
+
+            if($request->plate_issue_authority_file){
+                $name = time().'.'.$request->plate_issue_authority_file->extension();
+                $filePath = $request->file('plate_issue_authority_file')->storeAs('uploads', $name, 'public');
+    
+                $request->plate_issue_authority_file = time().'.'.$request->plate_issue_authority_file->extension();
+                
+                $request['plate_issue_authority'] =  $filePath;
+            }
+        }
+        
+        Vehicle::create($request->all());
         notify()->success('Car created');
         return redirect()->route('admin.categories.index');
     }
 
-    public function edit(ExpenseCategory $expenseCategory,$id)
+    public function edit(Vehicle $vehicle,$id)
     {
         abort_if(Gate::denies('expense_category_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $expenseCategory = ExpenseCategory::find($id);
-        $expenseCategory->load('created_by');
+        $vehicle = Vehicle::find($id);
+        $vehicle->load('created_by');
 
-        return view('admin.Categories.edit', compact('expenseCategory'));
+        return view('admin.Categories.edit', compact('vehicle'));
     }
 
-    public function update(UpdateExpenseCategoryRequest $request, ExpenseCategory $expenseCategory)
+    public function update(UpdateVehicleRequest $request, $id)
     {
-        $expenseCategory->update($request->all());
+
+        if($request->file()) {
+
+            if($request->mot_file){
+
+                if(Request::has('mot_delete'))
+                {
+                    
+                    unlink(public_path().'/storage/'.$request['mot_file']);
+                    $request['mot_file'] = '';
+                    
+                }
+
+                $name = time().'.'.$request->mot_file->extension();
+
+                $filePath = $request->file('mot_file')->storeAs('uploads', $name, 'public');
+                
+                $request->mot_file = time().'.'.$request->mot_file->extension();
+                
+                $request['mot'] =  $filePath;
+            }
+
+            if($request->plate_issue_authority_file){
+
+                 if(Request::has('plate_delete'))
+                {
+                    
+                    unlink(public_path().'/storage/'.$request['plate_issue_authority']);
+                    $request['plate_issue_authority'] = '';
+                    
+                }
+
+                $name = time().'.'.$request->plate_issue_authority_file->extension();
+                $filePath = $request->file('plate_issue_authority_file')->storeAs('uploads', $name, 'public');
+    
+                $request->plate_issue_authority_file = time().'.'.$request->plate_issue_authority_file->extension();
+                
+                $request['plate_issue_authority'] =  $filePath;
+            }
+        } 
+        elseif(Request::has('plate_delete'))
+        {
+            
+            unlink(public_path().'/storage/'.$request['plate_issue_authority']);
+            $request['plate_issue_authority'] = '';        
+        }
+        elseif(Request::has('mot_delete'))
+        {
+            
+            unlink(public_path().'/storage/'.$request['mot_file']);
+            $request['mot_file'] = '';
+            
+        }
+        $vehicle = Vehicle::find($id);
+        $vehicle->update($request->all());
         notify()->success('Car updated');
         return redirect()->route('admin.categories.index');
     }
 
-    public function show(ExpenseCategory $expenseCategory)
+    public function show(Vehicle $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -61,7 +143,7 @@ class CategoryController extends Controller
         return view('admin.Categories.show', compact('expenseCategory'));
     }
 
-    public function destroy(ExpenseCategory $expenseCategory)
+    public function destroy(Vehicle $expenseCategory)
     {
         abort_if(Gate::denies('expense_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         notify()->success('Car deleted');
@@ -70,10 +152,12 @@ class CategoryController extends Controller
         return back();
     }
 
-    public function massDestroy(MassDestroyExpenseCategoryRequest $request)
+    public function massDestroy(MassDestroyVehicleRequest $request)
     {
-        ExpenseCategory::whereIn('id', request('ids'))->delete();
+        Vehicle::whereIn('id', request('ids'))->delete();
         notify()->success('Cars deleted');
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+
 }

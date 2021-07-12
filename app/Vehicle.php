@@ -6,11 +6,11 @@ use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ExpenseCategory extends Model
+class Vehicle extends Model
 {
     use SoftDeletes, MultiTenantModelTrait;
 
-    public $table = 'expense_categories';
+    public $table = 'vehicles';
 
     protected $dates = [
         'created_at',
@@ -20,6 +20,14 @@ class ExpenseCategory extends Model
 
     protected $fillable = [
         'name',
+        'mot',
+        'mot_expiry',
+        'vehicle_reg',
+        'plate_no',
+        'plate_no_expiry',
+        'insurance_company',
+        'insurance_company_expiry',
+        'plate_issue_authority',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -71,4 +71,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Maintenances
     Route::delete('maintenances/destroy', 'MaintenanceController@massDestroy')->name('maintenances.massDestroy');
     Route::resource('maintenances', 'MaintenanceController');
+
+    // maintainers
+    Route::delete('maintainers/destroy', 'MaintainersController@massDestroy')->name('maintainers.massDestroy');
+    Route::resource('maintainers', 'MaintainersController');
+
+    Route::get('file/{id}','CategoryController@file')->name('file');
 });
