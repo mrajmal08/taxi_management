@@ -201,6 +201,11 @@
 });
 
     </script>
+    <style>
+    .dataTables_scrollHeadInner,.datatable-ExpenseCategory {
+        width:100% !important;
+    }
+</style>
     @yield('scripts')
 </body>
 
