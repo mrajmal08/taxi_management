@@ -30,7 +30,7 @@ class DriverController extends Controller
     public function create()
     {
         $insurances = Insurance::all();
-        $categories = Vehicles::all();
+        $categories = Vehicle::all();
         return view('admin.Drivers.create',compact('categories','insurances'));
     }
 
@@ -67,7 +67,7 @@ class DriverController extends Controller
     public function edit($id)
     {
         $driver = Driver::with('car')->where('id',$id)->first();
-        $categories = Vehicles::all();
+        $categories = Vehicle::all();
         $insurances = Insurance::all();
         return view('admin.Drivers.edit',compact('categories','driver','insurances'));
 
