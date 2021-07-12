@@ -181,7 +181,7 @@
             </div> 
             <div class="form-group {{ $errors->has('insurance_provider') ? 'has-error' : '' }} col-6">
                 <label for="insurance_provider">{{ trans('cruds.drivers.fields.i_provider') }}*</label>
-                <select class="select2{{ $errors->has('insurance_provider') ? ' is-invalid' : '' }}" name="insurance_provider" id="insurance_provider" >
+                <select class="form-control select2{{ $errors->has('insurance_provider') ? ' is-invalid' : '' }}" name="insurance_provider" id="insurance_provider" >
                         <option value="none">None</option>
                         @foreach($insurances as $insurance)
                             <option value="{{$insurance->id}}">{{$insurance->name}}</option>
@@ -223,7 +223,7 @@
             </div> 
             <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }} col-6">
                 <label for="gender">{{ trans('cruds.drivers.fields.gender') }}*</label>
-                <select class="select2{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" id="gender" >
+                <select class="form-control select2{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" id="gender" >
                         <option value="0">Male</option>
                         <option value="1">Female</option>
                         <option value="2">Other</option>
@@ -251,7 +251,7 @@
             </div>
             <div class="form-group {{ $errors->has('is_verified') ? 'has-error' : '' }} col-6">
                 <label for="is_verified">{{ trans('cruds.drivers.fields.is_verified') }}*</label>
-                <select class="select2{{ $errors->has('is_verified') ? ' is-invalid' : '' }}" name="is_verified" id="is_verified" >
+                <select class="form-control select2{{ $errors->has('is_verified') ? ' is-invalid' : '' }}" name="is_verified" id="is_verified" >
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                     </select>
@@ -266,7 +266,7 @@
             </div>
              <div class="form-group {{ $errors->has('is_active') ? 'has-error' : '' }} col-6">
                 <label for="is_active">{{ trans('cruds.drivers.fields.is_active') }}*</label>
-                <select class="select2{{ $errors->has('is_active') ? ' is-invalid' : '' }}" name="is_active" id="is_active" >
+                <select class="form-control select2{{ $errors->has('is_active') ? ' is-invalid' : '' }}" name="is_active" id="is_active" >
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                     </select>
@@ -282,7 +282,7 @@
 
              <div class="form-group {{ $errors->has('car') ? 'has-error' : '' }} col-6">
                 <label for="car">{{ trans('cruds.drivers.fields.car') }}*</label>
-                <select class="select2{{ $errors->has('car_type') ? ' is-invalid' : '' }}" name="car_type" id="car" >
+                <select class="form-control select2{{ $errors->has('car_type') ? ' is-invalid' : '' }}" name="car_type" id="car" >
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
