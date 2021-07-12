@@ -11,7 +11,7 @@
             @csrf
             <div class="form-group {{ $errors->has('driver') ? 'has-error' : '' }}">
                 <label for="driver">{{ trans('cruds.entries.fields.driver') }}*</label>
-                 <select class="from-control select2{{ $errors->has('driver_id') ? ' is-invalid' : '' }}" name="driver_id" id="driver_id" >
+                 <select class="form-control select2{{ $errors->has('driver_id') ? ' is-invalid' : '' }}" name="driver_id" id="driver_id" >
                         @foreach($drivers as $driver)
                             <option value="{{$driver->id}}">{{$driver->name}}</option>
                         @endforeach
@@ -44,7 +44,7 @@
                     </em>
                 @endif
             </div>
-            
+
             <div class="form-group {{ $errors->has('route_id') ? 'has-error' : '' }}">
                 <label for="status">{{ trans('cruds.entries.fields.route') }}*</label>
                 <select class="form-control select2{{ $errors->has('route_id') ? ' is-invalid' : '' }}" name="route_id" id="type" >
