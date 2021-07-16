@@ -25,6 +25,7 @@ class Driver extends Model
         'phone',
         'address',
         'email',
+        'badge',
         'license_no',
         'license_expiry',
         'gender',

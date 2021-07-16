@@ -198,6 +198,24 @@
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
             </div>
+             <div class="form-group {{ $errors->has('badge') ? 'has-error' : '' }} col-6">
+                <label for="badge">{{ trans('cruds.drivers.fields.badge') }}*</label>
+                <select class="form-control select2{{ $errors->has('badge') ? ' is-invalid' : '' }}" name="badge" id="badge" >
+                        <option value="none">None</option>
+                        @foreach($badges as $badge)
+                            <option value="{{$badge->id}}" @if($driver->badge == $badge->id) selected="selected" @endif>{{$badge->badge}}</option>
+                        @endforeach
+                        <option value="other">Other</option>
+                    </select>
+                @if($errors->has('badge'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('badge') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.drivers.fields.name_helper') }}
+                </p>
+            </div>
             <div class="form-group {{ $errors->has('start_date') ? 'has-error' : '' }} col-6">
                 <label for="start_date">{{ trans('cruds.drivers.fields.start_date') }}*</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" value="{{ old('start_date', isset($driver) ? $driver->start_date : '') }}" required>

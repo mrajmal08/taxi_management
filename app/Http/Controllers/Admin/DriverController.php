@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Driver;
 use App\Insurance;
 use App\Vehicle;
+use App\Badge;
 use App\Http\Requests\MassDestroyDriverRequest;
 
 class DriverController extends Controller
@@ -31,7 +32,8 @@ class DriverController extends Controller
     {
         $insurances = Insurance::all();
         $categories = Vehicle::all();
-        return view('admin.Drivers.create',compact('categories','insurances'));
+        $badges = Badge::all();
+        return view('admin.Drivers.create',compact('categories','insurances','badges'));
     }
 
     /**
@@ -69,7 +71,8 @@ class DriverController extends Controller
         $driver = Driver::with('car')->where('id',$id)->first();
         $categories = Vehicle::all();
         $insurances = Insurance::all();
-        return view('admin.Drivers.edit',compact('categories','driver','insurances'));
+        $badges = Badge::all();
+        return view('admin.Drivers.edit',compact('categories','driver','insurances','badges'));
 
     }
 

@@ -30,6 +30,15 @@
                     </em>
                 @endif
             </div>
+            <div class="form-group {{ $errors->has('vehicle_reg_doc') ? 'has-error' : '' }}">
+                <label for="vehicle_reg_doc">{{ trans('cruds.vehicle.fields.vehicle_reg_doc') }}</label>
+                  <input type="file" id="vehicle_reg_doc" name="vehicle_reg_doc_file" class="form-control" value="{{ old('vehicle_reg_doc', isset($vehicle) ? $vehicle->vehicle_reg_doc : '') }}">
+                @if($errors->has('vehicle_reg_doc'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('vehicle_reg_doc') }}
+                    </em>
+                @endif
+            </div>
             <div class="form-group {{ $errors->has('plate_no') ? 'has-error' : '' }}">
                 <label for="plate_no">{{ trans('cruds.vehicle.fields.plate_no') }}*</label>
                   <input type="text" id="plate_no" name="plate_no" class="form-control" value="{{ old('plate_no', isset($vehicle) ? $vehicle->plate_no : '') }}" required>
@@ -77,10 +86,19 @@
             </div>
             <div class="form-group {{ $errors->has('insurance_company_expiry') ? 'has-error' : '' }}">
                 <label for="insurance_company_expiry">{{ trans('cruds.vehicle.fields.insurance_company_expiry') }}*</label>
-                  <input type="date" id="date" name="insurance_company_expiry" class="form-control" value="{{ old('insurance_company_expiry', isset($vehicle) ? $vehicle->insurance_company_expiry : '') }}" required>
+                  <input type="date" id="date" name="insurance_company_expiry" class="form-control" value="{{ old('insurance_company_expiry', isset($vehicle) ? $vehicle->insurance_company_expiry : '') }}" >
                 @if($errors->has('insurance_company_expiry'))
                     <em class="invalid-feedback">
                         {{ $errors->first('insurance_company_expiry') }}
+                    </em>
+                @endif
+            </div>
+             <div class="form-group {{ $errors->has('insurance_doc_file') ? 'has-error' : '' }}">
+                <label for="insurance_doc_file">{{ trans('cruds.vehicle.fields.insurance_company_doc') }}*</label>
+                  <input type="file" id="date" name="insurance_doc_file" class="form-control" value="{{ old('insurance_reg_doc', isset($vehicle) ? $vehicle->insurance_reg_doc : '') }}">
+                @if($errors->has('insurance_doc_file'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('insurance_doc_file') }}
                     </em>
                 @endif
             </div>

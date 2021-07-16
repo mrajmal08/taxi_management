@@ -44,10 +44,16 @@
                             {{ trans('cruds.vehicle.fields.vehicle_reg') }}
                         </th>
                         <th>
+                            {{ trans('cruds.vehicle.fields.vehicle_reg_doc') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.vehicle.fields.insurance_company') }}
                         </th>
                         <th>
                             {{ trans('cruds.vehicle.fields.insurance_company_expiry') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.vehicle.fields.insurance_company_doc') }}
                         </th>
                         <th>
                             {{ trans('cruds.vehicle.fields.plate_issue_authority') }}
@@ -89,10 +95,24 @@
                                 {{ $vehicle->vehicle_reg ?? '' }}
                             </td>
                             <td>
+                                 @if($vehicle->vehicle_reg_doc != null) 
+                                <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->vehicle_reg_doc)}}')">View</a>
+                                @else
+                                 Not available
+                                @endif
+                            </td>
+                            <td>
                                 {{ $vehicle->insurance_company ?? '' }}
                             </td>
                             <td>
                                 {{ $vehicle->insurance_company_expiry ?? '' }}
+                            </td>
+                            <td>
+                                @if($vehicle->insurance_reg_doc != null) 
+                                <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->insurance_reg_doc)}}')">View</a>
+                                @else
+                                 Not available
+                                @endif
                             </td>
                             <td>
                                 @if($vehicle->plate_issue_authority != null) 

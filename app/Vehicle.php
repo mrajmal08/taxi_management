@@ -23,6 +23,8 @@ class Vehicle extends Model
         'mot',
         'mot_expiry',
         'vehicle_reg',
+        'vehicle_reg_doc',
+        'insurance_reg_doc',
         'plate_no',
         'plate_no_expiry',
         'insurance_company',

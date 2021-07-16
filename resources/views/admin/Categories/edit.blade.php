@@ -31,6 +31,16 @@
                     </em>
                 @endif
             </div>
+             <div class="form-group {{ $errors->has('vehicle_reg_doc') ? 'has-error' : '' }}">
+                <input type="hidden" name="vehicle_reg_doc_file" value="{{ old('vehicle_reg_doc', isset($vehicle) ? $vehicle->vehicle_reg_doc : '') }}">
+                <label for="vehicle_reg_doc">{{ trans('cruds.vehicle.fields.vehicle_reg_doc') }}*</label><sub> (if don't want to update then leave empty)</sub></label>@if($vehicle->vehicle_reg_doc != null) <label class="float-right"><input type="checkbox" name="reg_delete"> Delete Registration doc</label>@endif
+                  <input type="file" id="vehicle_reg_doc" name="vehicle_reg_doc_file" class="form-control">
+                @if($errors->has('vehicle_reg_doc'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('vehicle_reg_doc') }}
+                    </em>
+                @endif
+            </div>
             <div class="form-group {{ $errors->has('plate_no') ? 'has-error' : '' }}">
                 <label for="plate_no">{{ trans('cruds.vehicle.fields.plate_no') }}*</label>
                   <input type="text" id="plate_no" name="plate_no" class="form-control" value="{{ old('plate_no', isset($vehicle) ? $vehicle->plate_no : '') }}" required>
@@ -83,6 +93,16 @@
                 @if($errors->has('insurance_company_expiry'))
                     <em class="invalid-feedback">
                         {{ $errors->first('insurance_company_expiry') }}
+                    </em>
+                @endif
+            </div>
+             <div class="form-group {{ $errors->has('insurance_doc_file') ? 'has-error' : '' }}">
+                <input type="hidden" name="insurance_doc_file" value="{{ old('insurance_reg_doc', isset($vehicle) ? $vehicle->insurance_reg_doc : '') }}">
+                <label for="insurance_doc_file">{{ trans('cruds.vehicle.fields.insurance_company_doc') }}*</label><sub> (if don't want to update then leave empty)</sub></label>@if($vehicle->insurance_reg_doc != null) <label class="float-right"><input type="checkbox" name="insurance_delete"> Delete Insurance doc</label>@endif
+                  <input type="file" name="insurance_doc_file" class="form-control" value="">
+                @if($errors->has('insurance_doc_file'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('insurance_doc_file') }}
                     </em>
                 @endif
             </div>
