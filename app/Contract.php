@@ -24,7 +24,10 @@ class Contract extends Model
         'driver',
         'cost_per_day',
         'pay_per_day',
+        'c_start_date',
+        'c_end_date',
         'vat_amount',
+        'pr_rate',
         'created_at',
         'updated_at'
     ];

@@ -22,7 +22,9 @@ class DailyEntry extends Model
         'type',
         'route_id',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'duty',
+        'description'
     ];
 
      public function driver()
@@ -38,5 +40,10 @@ class DailyEntry extends Model
      public function route()
     {
         return $this->belongsTo(Route::class, 'route_id');
+    }
+
+     public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'driver_id','driver');
     }
 }

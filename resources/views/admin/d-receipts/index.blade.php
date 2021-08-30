@@ -1,20 +1,42 @@
 @extends('layouts.admin')
 @section('content')
-@can('expense_category_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.entries.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.entries.title_singular') }}
-            </a>
+    <form action="{{ route("admin.driverreceipts.store") }}" target="_blank" method="POST" enctype="multipart/form-data" class="card">
+            @csrf
+        <div class="row ml-1 mt-2 mb-4 mr-1">
+            <div class="col-md-4">
+                <label>Start Date</label>
+                <input type="date" class="form-control" name="start_date" required="">
+            </div>
+            <div class="col-md-4">
+                <label>End Date</label>
+                <input type="date" class="form-control" name="end_date" required="">
+            </div>
+             <div class="col-md-4">
+                <label>Select Driver</label>
+                <select name="driver_id" class="form-control">
+                    @foreach($drivers as $driver)
+                        <option value="{{$driver->id}}">{{$driver->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+           <!--  <div class="col-md-4 mt-1">
+                <label>Vat Number</label>
+                <input type="text" name="vat_number" value="" class="form-control">
+            </div> -->
+            <div class="col-md-4 mt-1">
+                <label>Vat %</label>
+                <input type="number" name="vat" value="" class="form-control">
+            </div>
+            <div class="col-md-12 mt-2">
+                <input  class="btn btn-success text-white" type="submit" value="{{ trans('global.create') }} {{ trans('cruds.receipts.title_singular') }}">
+            </div>
         </div>
+    </form>
+ <div class="card">
+         <div class="card-header">
+        Reciepts
     </div>
-@endcan
-<div class="card">
-    <div class="card-header">
-        {{ trans('cruds.entries.title_singular') }} {{ trans('global.list') }}
-    </div>
-
-    <div class="card-body">
+     <div class="card-body">
         <div class="table-responsive">
             <table class=" table table-bordered table-striped table-hover datatable datatable-ExpenseCategory">
                 <thead>
@@ -23,25 +45,22 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.entries.fields.id') }}
+                            Dated
                         </th>
                         <th>
-                            {{ trans('cruds.entries.fields.driver') }}
+                            Invoice
                         </th>
                         <th>
-                            {{ trans('cruds.entries.fields.date') }}
+                            Start Date
+                        </th>
+                         <th>
+                            End Date
                         </th>
                         <th>
-                            {{ trans('cruds.entries.fields.status') }}
-                        </th> 
-                        <th>
-                            {{ trans('cruds.entries.fields.route') }}
+                            Driver
                         </th>
                         <th>
-                            {{ trans('cruds.entries.fields.duty') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.entries.fields.description') }}
+                            Vat%
                         </th>
                         <th>
                             &nbsp;
@@ -49,44 +68,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($entries as $key => $entry)
-                        <tr data-entry-id="{{ $entry->id }}">
+                    @foreach($reciepts as $key => $reciept)
+                        <tr data-entry-id="{{ $reciept->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $entry->id ?? '' }}
+                                {{ $reciept->created_date ?? '' }}
                             </td>
                             <td>
-                                {{ $entry->driver['name'] ?? '' }}
-                            </td> 
+                                <small>ATOZ</small>{{ $reciept->id ?? '' }}
+                            </td>
+                           
                             <td>
-                                {{ $entry->work_date ?? '' }}
+                              {{ $reciept->start_date ?? '' }}
                             </td>
                             <td>
-                                {{ $entry->holiday['holiday_type'] ?? '' }}
-                            </td> 
-                            <td>
-                                {{ $entry->route['route_id'] ?? '' }}
+                              {{ $reciept->end_date ?? '' }}
                             </td>
                             <td>
-                                @if($entry->duty == 1)
-                                    Full day
-                                @else
-                                    Half day
-                                @endif
+                              {{$reciept['drivers']['name'] ?? ''}}
                             </td>
                             <td>
-                                {{$entry->description}}
+                              {{$reciept->vat ?? ''}}
                             </td>
                             <td>
                               
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.entries.edit', $entry->id) }}">
-                                    {{ trans('global.edit') }}
+                                <a class="btn btn-xs btn-info" target="_blank" href="{{ route('admin.driverreceipts.show', $reciept->id) }}">
+                                    Print
                                 </a>
 
                           
-                                <form action="{{ route('admin.entries.destroy', $entry->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                <form action="{{ route('admin.driverreceipts.destroy', $reciept->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -100,10 +113,10 @@
                 </tbody>
             </table>
         </div>
-
+</div>
 
     </div>
-</div>
+
 @endsection
 @section('scripts')
 @parent
@@ -114,7 +127,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.entries.massDestroy') }}",
+    url: "{{ route('admin.driverreceipts.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

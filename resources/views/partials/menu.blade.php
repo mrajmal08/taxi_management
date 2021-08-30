@@ -185,6 +185,24 @@
                 </a>
             </li> 
             <li class="nav-item">
+                <a class="nav-link{{ request()->is('admin/receipts*') ? ' active' : '' }}" href="{{ route('admin.receipts.index') }}">
+                    <i class="fa-fw fas fa-receipt nav-icon">
+
+                    </i>
+
+                    Customer Receipts
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link{{ request()->is('admin/driverreceipts*') ? ' active' : '' }}" href="{{ route('admin.driverreceipts.index') }}">
+                    <i class="fa-fw fas fa-receipt nav-icon">
+
+                    </i>
+
+                    Driver Receipts
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
 

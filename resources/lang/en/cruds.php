@@ -62,7 +62,10 @@ return [
             'driver'    => 'Driver',
             'cost_per_day' => 'Cost Per Day',
             'vat_amount' => 'Vat Percentage',
-            'pay_per_day' => 'Pay Per Day'
+            'pay_per_day' => 'Pay Per Day',
+            'c_start_date' => 'Contract start date',
+            'c_end_date'   => 'Contract end date',
+            'pa_rate'   => 'PA Rate'
         ]
     ],
     'role'              => [
@@ -237,7 +240,22 @@ return [
             'driver' => 'Driver',
             'route'  => 'Route',
             'date'   => 'Date',
-            'status' => 'Work Status'
+            'status' => 'Work Status',
+            'duty' => 'Duty',
+            'description' => 'Description'
+        ]
+    ],
+    'receipts'    => [
+        'title'          => 'Receipts',
+        'title_singular' => 'Receipt',
+        'fields' => [
+            'id' => 'ID',
+            'driver' => 'Driver',
+            'route'  => 'Route',
+            'date'   => 'Date',
+            'status' => 'Work Status',
+            'duty' => 'Duty',
+            'description' => 'Description'
         ]
     ],
     'holidays'    => [

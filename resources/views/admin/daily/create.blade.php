@@ -58,6 +58,19 @@
                     </em>
                 @endif
             </div>
+            <div class="form-group {{ $errors->has('duty') ? 'has-error' : '' }}">
+                <label for="duty">{{ trans('cruds.entries.fields.duty') }}*</label>
+                <select class="form-control select2" name="duty">
+                        <option>select</option>
+                        <option value="1">Full day</option>
+                        <option value="2">Half day</option>
+                </select>       
+            </div>
+             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                <label for="description">{{ trans('cruds.entries.fields.description') }}*</label>
+                <textarea name="description" cols="5" class="form-control" required=""></textarea>
+            </div>
+                
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

@@ -48,6 +48,16 @@
                 @endif
                
             </div>
+            <div class="form-group {{ $errors->has('pa_rate') ? 'has-error' : '' }}">
+                <label for="pa_rate">{{ trans('cruds.contracts.fields.pa_rate') }}</label>
+                <input type="text" id="pa_rate" name="pr_rate" class="form-control" value="{{ old('pr_rate', isset($contract) ? $contract->pr_rate : '') }}">
+                @if($errors->has('pr_rate'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('pr_rate') }}
+                    </em>
+                @endif
+               
+            </div>
             <div class="form-group {{ $errors->has('cost_per_day') ? 'has-error' : '' }}">
                 <label for="cost_per_day">{{ trans('cruds.contracts.fields.cost_per_day') }}*</label>
                 <input type="text" id="cost_per_day" name="cost_per_day" class="form-control" value="{{ old('cost_per_day', isset($contract) ? $contract->cost_per_day : '') }}" required>
@@ -74,6 +84,26 @@
                 @if($errors->has('vat_amount'))
                     <em class="invalid-feedback">
                         {{ $errors->first('vat_amount') }}
+                    </em>
+                @endif
+               
+            </div>
+            <div class="form-group {{ $errors->has('c_start_date') ? 'has-error' : '' }}">
+                <label for="c_start_date">{{ trans('cruds.contracts.fields.c_start_date') }}*</label>
+                <input type="date" id="c_start_date" name="c_start_date" class="form-control" value="{{ old('c_start_date', isset($contract) ? $contract->c_start_date : '') }}" required>
+                @if($errors->has('c_start_date'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('c_start_date') }}
+                    </em>
+                @endif
+               
+            </div>
+            <div class="form-group {{ $errors->has('c_end_date') ? 'has-error' : '' }}">
+                <label for="c_end_date">{{ trans('cruds.contracts.fields.c_end_date') }}*</label>
+                <input type="date" id="c_end_date" name="c_end_date" class="form-control" value="{{ old('c_end_date', isset($contract) ? $contract->c_end_date : '') }}" required>
+                @if($errors->has('c_end_date'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('c_end_date') }}
                     </em>
                 @endif
                

@@ -38,6 +38,9 @@
                             {{ trans('cruds.contracts.fields.end') }}
                         </th>
                         <th>
+                            {{ trans('cruds.contracts.fields.pa_rate') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.contracts.fields.driver') }}
                         </th>
                         <th>
@@ -45,6 +48,12 @@
                         </th>
                         <th>
                             {{ trans('cruds.contracts.fields.vat_amount') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.contracts.fields.c_start_date') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.contracts.fields.c_end_date') }}
                         </th>
                         <th>
                             &nbsp;
@@ -72,7 +81,9 @@
                             <td>
                               {{ $contract->finish ?? '' }}
                             </td>
-                            
+                            <td>
+                                {{$contract->pa_rate ?? ''}}
+                            </td>
                             <td>
                               {{$contract['drivers']['name'] ?? ''}}
                             </td>
@@ -81,6 +92,12 @@
                             </td>
                             <td>
                               {{$contract->vat_amount ?? ''}}
+                            </td>
+                            <td>
+                              {{$contract->c_start_date ?? ''}}
+                            </td>
+                            <td>
+                              {{$contract->c_end_date ?? ''}}
                             </td>
                             <td>
                               
