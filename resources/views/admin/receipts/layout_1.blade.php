@@ -19,7 +19,7 @@
                         <!-- Start .row -->
                         <div class="col-xs-4">
                             <!-- col-xs-6 start here -->
-                            <div class="invoice-logo"><img width="250" src="{{asset('logo.jpg')}}" alt="Invoice logo"></div>
+                            <div class="invoice-logo"><img width="250" src="{{asset('public/logo.jpg')}}" alt="Invoice logo"></div>
                                 <p style="width:25rem; font-weight: 600;">15 CHARLES STREET,NEATH. SA11 1NF NEATH PORTTALBOT</p>
                                 
                                     <i class="fa fa-phone"></i> 01639 77 88 77

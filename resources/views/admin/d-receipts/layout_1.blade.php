@@ -19,7 +19,7 @@
                         <!-- Start .row -->
                         <div class="col-xs-12">
                             <!-- col-xs-6 start here -->
-                            <div class="invoice-logo"><img width="250" src="{{asset('logo.jpg')}}" alt="Invoice logo"></div>
+                            <div class="invoice-logo"><img width="250" src="{{asset('public/logo.jpg')}}" alt="Invoice logo"></div>
                         </div>
                         <!-- col-xs-6 end here -->
                         <div class="col-xs-7">
