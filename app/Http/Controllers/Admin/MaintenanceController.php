@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyMaintenanceRequest;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Redirect;
+
 
 class MaintenanceController extends Controller
 {
@@ -46,9 +48,22 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
+            $request->validate([
+                'vehicle_id' => 'required',
+                'entry_date' => 'required',
+                'supplier' => 'required',
+                'maintenance_by' => 'required',
+                'millage' => 'required',
+                'cost' => 'required',
+            ]);
+        try {
         $maintenances = Maintenance::create($request->all());
         notify()->success('Vehicle maintenance created');
         return redirect()->route('admin.maintenances.index');
+
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['Something went wrong!']);
+        }
     }
 
     /**

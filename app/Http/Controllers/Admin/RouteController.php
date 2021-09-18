@@ -66,8 +66,7 @@ class RouteController extends Controller
     public function edit($id)
     {
         $route = Route::where('id',$id)->first();
-        
-        return view('admin.routes.edit', compact('route'));
+        return view('admin.Routes.edit', compact('route'));
     }
 
     /**

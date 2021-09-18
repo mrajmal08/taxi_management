@@ -10,7 +10,7 @@ use App\Http\Requests\UpdateVehicleRequest;
 use Gate;
 use Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use Redirect;
 
 class CategoryController extends Controller
 {
@@ -32,55 +32,60 @@ class CategoryController extends Controller
 
     public function store(StoreVehicleRequest $request)
     {
+
          $request->validate([
             'mot_file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048',
             'vehicle_reg_doc' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048',
             'plate_issue_authority_file' => 'required|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf|max:2048'
             ]);
-        
+
         if($request->file()) {
 
             if($request->mot_file){
                 $name = time().'.'.$request->mot_file->extension();
 
                 $filePath = $request->file('mot_file')->storeAs('uploads', $name, 'public');
-                
+
                 $request->mot_file = time().'.'.$request->mot_file->extension();
-                
+
                 $request['mot'] =  $filePath;
             }
 
             if($request->plate_issue_authority_file){
                 $name = time().'.'.$request->plate_issue_authority_file->extension();
                 $filePath = $request->file('plate_issue_authority_file')->storeAs('uploads', $name, 'public');
-    
+
                 $request->plate_issue_authority_file = time().'.'.$request->plate_issue_authority_file->extension();
-                
+
                 $request['plate_issue_authority'] =  $filePath;
             }
 
             if($request->vehicle_reg_doc_file){
                 $name = time().'.'.$request->vehicle_reg_doc_file->extension();
                 $filePath = $request->file('vehicle_reg_doc_file')->storeAs('uploads', $name, 'public');
-    
+
                 $request->vehicle_reg_doc_file = time().'.'.$request->vehicle_reg_doc_file->extension();
-                
+
                 $request['vehicle_reg_doc'] =  $filePath;
             }
 
             if($request->insurance_doc_file){
                 $name = time().'.'.$request->insurance_doc_file->extension();
                 $filePath = $request->file('insurance_doc_file')->storeAs('uploads', $name, 'public');
-    
+
                 $request->insurance_doc_file = time().'.'.$request->insurance_doc_file->extension();
-                
+
                 $request['insurance_reg_doc'] =  $filePath;
             }
         }
-        
-        Vehicle::create($request->all());
-        notify()->success('Car created');
-        return redirect()->route('admin.categories.index');
+
+       $result = Vehicle::create($request->all());
+       if ($result) {
+           notify()->success('Car created');
+           return redirect()->route('admin.categories.index');
+       }else{
+           return Redirect::back()->withErrors(['Something went wrong!']);
+       }
     }
 
     public function edit(Vehicle $vehicle,$id)
@@ -94,25 +99,25 @@ class CategoryController extends Controller
 
     public function update(UpdateVehicleRequest $request, $id)
     {
-        
+
         if($request->file()) {
 
             if($request->hasFile('mot_file')){
 
                 if(Request::has('mot_delete'))
                 {
-                    
+
                     unlink(public_path().'/storage/'.$request['mot_file']);
                     $request['mot_file'] = '';
-                    
+
                 }
 
                 $name = time().'.'.$request->mot_file->extension();
 
                 $filePath = $request->file('mot_file')->storeAs('uploads', $name, 'public');
-                
+
                 $request->mot_file = time().'.'.$request->mot_file->extension();
-                
+
                 $request['mot'] =  $filePath;
             }
 
@@ -120,17 +125,17 @@ class CategoryController extends Controller
 
                  if(Request::has('plate_delete'))
                 {
-                    
+
                     unlink(public_path().'/storage/'.$request['plate_issue_authority']);
                     $request['plate_issue_authority'] = '';
-                    
+
                 }
 
                 $name = time().'.'.$request->plate_issue_authority_file->extension();
                 $filePath = $request->file('plate_issue_authority_file')->storeAs('uploads', $name, 'public');
-    
+
                 $request->plate_issue_authority_file = time().'.'.$request->plate_issue_authority_file->extension();
-                
+
                 $request['plate_issue_authority'] =  $filePath;
             }
 
@@ -138,17 +143,17 @@ class CategoryController extends Controller
 
                  if(Request::has('reg_delete'))
                 {
-                    
+
                     unlink(public_path().'/storage/'.$request['vehicle_reg_doc_file']);
                     $request['vehicle_reg_doc'] = '';
-                    
+
                 }
 
                 $name = time().'.'.$request->vehicle_reg_doc_file->extension();
                 $filePath = $request->file('vehicle_reg_doc_file')->storeAs('uploads', $name, 'public');
-    
+
                 $request->vehicle_reg_doc_file = time().'.'.$request->vehicle_reg_doc_file->extension();
-                
+
                 $request['vehicle_reg_doc'] =  $filePath;
             }
 
@@ -156,46 +161,46 @@ class CategoryController extends Controller
 
                  if(Request::has('insurance_delete'))
                 {
-                    
+
                     unlink(public_path().'/storage/'.$request['insurance_doc_file']);
                     $request['insurance_reg_doc'] = '';
-                    
+
                 }
-                
+
                 $name = time().'.'.$request->insurance_doc_file->extension();
                 $filePath = $request->file('insurance_doc_file')->storeAs('uploads', $name, 'public');
-    
+
                 $request->insurance_doc_file = time().'.'.$request->insurance_doc_file->extension();
-                
+
                 $request['insurance_reg_doc'] =  $filePath;
             }
-        } 
+        }
         elseif(Request::has('plate_delete'))
         {
-            
+
             unlink(public_path().'/storage/'.$request['plate_issue_authority']);
-            $request['plate_issue_authority'] = '';        
+            $request['plate_issue_authority'] = '';
         }
         elseif(Request::has('mot_delete'))
         {
-            
+
             unlink(public_path().'/storage/'.$request['mot_file']);
             $request['mot_file'] = '';
-            
-        } 
+
+        }
         elseif(Request::has('reg_delete'))
         {
-            
+
             unlink(public_path().'/storage/'.$request['vehicle_reg_doc_file']);
             $request['vehicle_reg_doc'] = '';
-            
+
         }
         elseif(Request::has('insurance_delete'))
         {
-            
+
             unlink(public_path().'/storage/'.$request['insurance_doc_file']);
             $request['insurance_reg_doc'] = '';
-            
+
         }
 
         $vehicle = Vehicle::find($id);

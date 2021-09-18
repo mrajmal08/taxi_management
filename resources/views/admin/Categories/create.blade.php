@@ -32,7 +32,7 @@
             </div>
             <div class="form-group {{ $errors->has('vehicle_reg_doc') ? 'has-error' : '' }}">
                 <label for="vehicle_reg_doc">{{ trans('cruds.vehicle.fields.vehicle_reg_doc') }}</label>
-                  <input type="file" id="vehicle_reg_doc" name="vehicle_reg_doc_file" class="form-control" value="{{ old('vehicle_reg_doc', isset($vehicle) ? $vehicle->vehicle_reg_doc : '') }}">
+                  <input type="file" id="vehicle_reg_doc" name="vehicle_reg_doc" class="form-control" value="{{ old('vehicle_reg_doc', isset($vehicle) ? $vehicle->vehicle_reg_doc : '') }}">
                 @if($errors->has('vehicle_reg_doc'))
                     <em class="invalid-feedback">
                         {{ $errors->first('vehicle_reg_doc') }}

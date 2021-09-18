@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyExpenseRequest;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Redirect;
 
 class ExpenseController extends Controller
 {
@@ -42,9 +43,22 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
+            $request->validate([
+                'entry_date' => 'required|max:255',
+                'supplier' => 'required',
+                'sub_total' => 'required',
+                'vat' => 'required',
+                'paymnet_method' => 'required',
+            ]);
+        try {
+
         $expense = Expense::create($request->all());
         notify()->success('Expense created');
         return redirect()->route('admin.expenses.index');
+
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['Something went wrong!']);
+        }
     }
 
     /**

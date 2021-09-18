@@ -9,7 +9,8 @@ use App\Insurance;
 use App\Vehicle;
 use App\Badge;
 use App\Http\Requests\MassDestroyDriverRequest;
-
+use Redirect;
+use DB;
 class DriverController extends Controller
 {
     /**
@@ -20,6 +21,8 @@ class DriverController extends Controller
     public function index()
     {
         $drivers    = Driver::with('car')->get();
+//        $drivers    = DB::table('drivers')->get();
+
         return view('admin.Drivers.index', compact('drivers'));
     }
 
@@ -44,9 +47,28 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        Driver::create($request->all());
-        notify()->success('Driver created');
-        return redirect()->route('admin.drivers.index');
+            $request->validate([
+                'name' => 'required|max:255',
+                'phone' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'license_no' => 'required',
+                'license_expiry' => 'required',
+                'vehicle_reg' => 'required',
+                'plate_number' => 'required',
+                'plate_renewal' => 'required',
+                'capacity' => 'required',
+                'insurance_renewal_date' => 'required',
+                'dob' => 'required',
+            ]);
+        try {
+            Driver::create($request->all());
+            notify()->success('Driver created');
+            return redirect()->route('admin.drivers.index');
+
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['Something went wrong!']);
+        }
     }
 
     /**

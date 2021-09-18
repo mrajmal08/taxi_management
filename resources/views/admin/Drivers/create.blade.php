@@ -2,6 +2,14 @@
 @section('content')
 
 <div class="card">
+
+    @if($errors->any())
+        <div class="alert alert-success">
+            <ul>
+                <li>{{$errors->first()}}</li>
+            </ul>
+        </div>
+    @endif
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.drivers.title_singular') }}
     </div>
@@ -105,7 +113,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
             <div class="form-group {{ $errors->has('license_expiry') ? 'has-error' : '' }} col-6">
                 <label for="license_expiry">{{ trans('cruds.drivers.fields.license_exp') }}*</label>
                 <input type="date" id="license_expiry" name="license_expiry" class="form-control" value="{{ old('license_expiry', isset($driver) ? $driver->license_expiry : '') }}" required>
@@ -117,7 +125,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
             <div class="form-group {{ $errors->has('vehicle_reg') ? 'has-error' : '' }} col-6">
                 <label for="vehicle_reg">{{ trans('cruds.drivers.fields.vehicle_reg') }}*</label>
                 <input type="text" id="vehicle_reg" name="vehicle_reg" class="form-control" value="{{ old('vehicle_reg', isset($driver) ? $driver->vehicle_reg : '') }}" required>
@@ -129,7 +137,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div>  
+            </div>
             <div class="form-group {{ $errors->has('plate_number') ? 'has-error' : '' }} col-6">
                 <label for="plate_number">{{ trans('cruds.drivers.fields.plate_number') }}*</label>
                 <input type="text" id="plate_number" name="plate_number" class="form-control" value="{{ old('plate_number', isset($driver) ? $driver->plate_number : '') }}" required>
@@ -141,8 +149,8 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div>  
-            
+            </div>
+
             <div class="form-group {{ $errors->has('plate_renewal') ? 'has-error' : '' }} col-6">
                 <label for="plate_renewal">{{ trans('cruds.drivers.fields.plate_renewal') }}*</label>
                 <input type="date" id="plate_renewal" name="plate_renewal" class="form-control" value="{{ old('plate_renewal', isset($driver) ? $driver->plate_renewal : '') }}" required>
@@ -154,7 +162,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
              <div class="form-group {{ $errors->has('capacity') ? 'has-error' : '' }} col-6">
                 <label for="capacity">{{ trans('cruds.drivers.fields.capacity') }}*</label>
                 <input type="number" id="capacity" name="capacity" class="form-control" value="{{ old('capacity', isset($driver) ? $driver->capacity : '') }}" required>
@@ -166,7 +174,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
             <div class="form-group {{ $errors->has('insurance_renewal_date') ? 'has-error' : '' }} col-6">
                 <label for="insurance_renewal_date">{{ trans('cruds.drivers.fields.r_date') }}*</label>
                 <input type="date" id="insurance_renewal_date" name="insurance_renewal_date" class="form-control" value="{{ old('insurance_renewal_date', isset($driver) ? $driver->insurance_renewal_date : '') }}" required>
@@ -178,7 +186,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
             <div class="form-group {{ $errors->has('insurance_provider') ? 'has-error' : '' }} col-6">
                 <label for="insurance_provider">{{ trans('cruds.drivers.fields.i_provider') }}*</label>
                 <select class="form-control select2{{ $errors->has('insurance_provider') ? ' is-invalid' : '' }}" name="insurance_provider" id="insurance_provider" >
@@ -200,11 +208,10 @@
             <div class="form-group {{ $errors->has('badge') ? 'has-error' : '' }} col-6">
                 <label for="badge">{{ trans('cruds.drivers.fields.badge') }}*</label>
                 <select class="form-control select2{{ $errors->has('badge') ? ' is-invalid' : '' }}" name="badge" id="badge" >
-                        <option value="none">None</option>
+                        <option selected disabled>----</option>
                         @foreach($badges as $badge)
                             <option value="{{$badge->id}}">{{$badge->badge}}</option>
                         @endforeach
-                        <option value="other">Other</option>
                     </select>
                 @if($errors->has('badge'))
                     <em class="invalid-feedback">
@@ -226,7 +233,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
             <div class="form-group {{ $errors->has('finish_date') ? 'has-error' : '' }} col-6">
                 <label for="finish_date">{{ trans('cruds.drivers.fields.finish_date') }}*</label>
                 <input type="date" id="finish_date" name="finish_date" class="form-control" value="{{ old('finish_date', isset($driver) ? $driver->finish_date : '') }}" required>
@@ -238,7 +245,7 @@
                 <p class="helper-block">
                     {{ trans('cruds.drivers.fields.name_helper') }}
                 </p>
-            </div> 
+            </div>
             <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }} col-6">
                 <label for="gender">{{ trans('cruds.drivers.fields.gender') }}*</label>
                 <select class="form-control select2{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" id="gender" >
@@ -304,7 +311,7 @@
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
-                        
+
                     </select>
                 @if($errors->has('car'))
                     <em class="invalid-feedback">

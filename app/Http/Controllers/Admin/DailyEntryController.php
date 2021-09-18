@@ -10,6 +10,7 @@ use App\Holiday;
 use App\Driver;
 use App\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Redirect;
 
 class DailyEntryController extends Controller
 {
@@ -46,9 +47,22 @@ class DailyEntryController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'driver_id' => 'required',
+            'work_date' => 'required',
+            'type' => 'required',
+            'route_id' => 'required',
+            'duty' => 'required',
+        ]);
+        try {
         $entry = DailyEntry::create($request->all());
         notify()->success('Driver Entry created');
         return redirect()->route('admin.entries.index');
+
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['Something went wrong!']);
+        }
     }
 
     /**

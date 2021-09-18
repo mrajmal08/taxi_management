@@ -2,6 +2,15 @@
 @section('content')
 
 <div class="card">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.entries.title_singular') }}
     </div>
@@ -64,13 +73,13 @@
                         <option>select</option>
                         <option value="1">Full day</option>
                         <option value="2">Half day</option>
-                </select>       
+                </select>
             </div>
              <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                 <label for="description">{{ trans('cruds.entries.fields.description') }}*</label>
                 <textarea name="description" cols="5" class="form-control" required=""></textarea>
             </div>
-                
+
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

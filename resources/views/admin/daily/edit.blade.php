@@ -64,12 +64,11 @@
                         <option>select</option>
                         <option @if($entry->duty == 1) selected="selected" @endif value="1">Full day</option>
                         <option @if($entry->duty == 2) selected="selected" @endif value="2">Half day</option>
-                </select>       
+                </select>
             </div>
             <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                 <label for="description">{{ trans('cruds.entries.fields.description') }}*</label>
-                <textarea name="description" cols="5" class="form-control" required="">
-                    {{$entry->description}}
+                <textarea name="description" cols="5" class="form-control" required="">{{$entry->description}}
                 </textarea>
             </div>
             <div>

@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyRecieptRequest;
 use App\Driver;
 use App\DailyEntry;
 use App\Receipt;
+use Redirect;
 
 class ReceiptController extends Controller
 {
@@ -20,7 +21,7 @@ class ReceiptController extends Controller
     {
         $drivers = Driver::all();
         $reciepts = Receipt::with('drivers')->get();
-        
+
         return view('admin.receipts.index',compact('drivers','reciepts'));
     }
 
@@ -31,7 +32,7 @@ class ReceiptController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -42,8 +43,16 @@ class ReceiptController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'driver_id' => 'required',
+            'vat_number' => 'required',
+        ]);
+
+        try{
+
         $data = DailyEntry::whereBetween('work_date',[$request['start_date'],$request['end_date']])->with(['contract','driver'])->where('driver_id',$request['driver_id'])->get();
-        
         $total_paid = 0;
         $full_days = 0;
         $half_days = 0;
@@ -72,11 +81,11 @@ class ReceiptController extends Controller
         {
             $vat_amount= ($request['vat'] / 100) * $total_paid;
         }
-            
+
         $driver_id = $data[0]['driver_id'];
         $total_paid_vat = $total_paid + $vat_amount;
         $check = Receipt::where('start_date',$request['start_date'])->where('end_date',$request['end_date'])->where('driver_id',$request['driver_id'])->get();
-        
+
         if(count($check) == 0){
             $invoice_id = Receipt::create([
                 'start_date' => $request['start_date'],
@@ -91,9 +100,14 @@ class ReceiptController extends Controller
             ])->id;
         } else {
             $invoice_id = $check[0]['id'];
-        }     
+        }
         //dd($total_paid,$full_days,$half_days,$data,$request);
         return view('admin.receipts.layout_1',compact('data','total_paid','date','postal','company','company','ref','vat_number','vat_percent','vat_amount','total_paid_vat','invoice_id'));
+
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['Something went wrong!']);
+        }
+
     }
 
     /**
@@ -107,7 +121,7 @@ class ReceiptController extends Controller
         $rec = Receipt::where('id',$id)->get();
 
         $data = DailyEntry::whereBetween('work_date',[$rec[0]['start_date'],$rec[0]['end_date']])->with(['contract','driver'])->where('driver_id',$rec[0]['driver_id'])->get();
-        
+
         $total_paid = 0;
         $full_days = 0;
         $half_days = 0;
@@ -136,7 +150,7 @@ class ReceiptController extends Controller
         {
             $vat_amount= ($rec[0]['vat'] / 100) * $total_paid;
         }
-            
+
         $driver_id = $rec[0]['driver_id'];
         $total_paid_vat = $total_paid + $vat_amount;
         $invoice_id = $rec[0]['id'];
