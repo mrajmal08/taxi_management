@@ -34,18 +34,13 @@
                     {{ trans('cruds.user.fields.email_helper') }}
                 </p>
             </div>
-            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label for="password">{{ trans('cruds.user.fields.password') }}</label>
-                <input type="password" id="password" name="password" class="form-control">
-                @if($errors->has('password'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('password') }}
-                    </em>
-                @endif
-                <p class="helper-block">
-                    {{ trans('cruds.user.fields.password_helper') }}
-                </p>
-            </div>
+{{--            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">--}}
+{{--                <label for="password">{{ trans('cruds.user.fields.password') }}</label>--}}
+{{--                <input type="password" id="password" name="password" class="form-control">--}}
+{{--                <p class="helper-block">--}}
+{{--                    {{ trans('cruds.user.fields.password_helper') }}--}}
+{{--                </p>--}}
+{{--            </div>--}}
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                 <label for="roles">{{ trans('cruds.user.fields.roles') }}*
                     <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>

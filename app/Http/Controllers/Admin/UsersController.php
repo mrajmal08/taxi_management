@@ -55,16 +55,13 @@ class UsersController extends Controller
     {
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
-
         return redirect()->route('admin.users.index');
     }
 
     public function show(User $user)
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $user->load('roles');
-
         return view('admin.users.show', compact('user'));
     }
 
