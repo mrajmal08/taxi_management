@@ -32,7 +32,7 @@
                             {{ trans('cruds.role.fields.permissions') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>

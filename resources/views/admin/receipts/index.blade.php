@@ -34,7 +34,7 @@
             <div class="col-md-4 mt-1">
                 <label>Postal Code</label>
                 <input type="text" name="code" value="" class="form-control">
-            </div> 
+            </div>
             <div class="col-md-4 mt-1">
                 <label>Vat %</label>
                 <input type="number" name="vat" value="" class="form-control">
@@ -87,7 +87,7 @@
                             Vat%
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -101,9 +101,9 @@
                                 {{ $reciept->created_date ?? '' }}
                             </td>
                             <td>
-                                <small>ATOZ</small>{{ $reciept->id ?? '' }}
+                                <small>ATOZ </small>{{ $reciept->id ?? '' }}
                             </td>
-                           
+
                             <td>
                               {{ $reciept->start_date ?? '' }}
                             </td>
@@ -115,7 +115,7 @@
                             </td>
                             <td>
                               {{$reciept->company ?? ''}}
-                            </td> 
+                            </td>
                             <td>
                               {{$reciept->vat_number ?? ''}}
                             </td>
@@ -129,18 +129,18 @@
                               {{$reciept->vat ?? ''}}
                             </td>
                             <td>
-                              
+
                                 <a class="btn btn-xs btn-info" target="_blank" href="{{ route('admin.receipts.show', $reciept->id) }}">
                                     Print
                                 </a>
 
-                          
+
                                 <form action="{{ route('admin.receipts.destroy', $reciept->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 

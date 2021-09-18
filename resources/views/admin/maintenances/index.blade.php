@@ -48,12 +48,12 @@
                         </th>
                         <th>
                             {{ trans('cruds.maintenances.fields.la_cost') }}
-                        </th> 
+                        </th>
                         <th>
                             {{ trans('cruds.maintenances.fields.la_vat') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -94,18 +94,18 @@
                                 {{ $maintenance->labor_vat ?? 0 }}
                             </td>
                             <td>
-                              
+
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.maintenances.edit', $maintenance->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
 
-                          
+
                                 <form action="{{ route('admin.maintenances.destroy', $maintenance->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 

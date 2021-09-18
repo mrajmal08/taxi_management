@@ -47,7 +47,7 @@
                             {{ trans('cruds.expenses.fields.paymnet_reference') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -82,18 +82,18 @@
                                 {{ $expense->paymnet_reference ?? '' }}
                             </td>
                             <td>
-                              
+
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.expenses.edit', $expense->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
 
-                          
+
                                 <form action="{{ route('admin.expenses.destroy', $expense->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 

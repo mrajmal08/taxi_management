@@ -29,7 +29,7 @@
                             {{ trans('cruds.suppliers.fields.name') }}
                         </th>
                         <th>
-                            &nbsp;
+                            Action&nbsp;
                         </th>
                     </tr>
                 </thead>
@@ -46,18 +46,18 @@
                                 {{ $supplier->name ?? '' }}
                             </td>
                             <td>
-                              
+
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.suppliers.edit', $supplier->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
 
-                          
+
                                 <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 

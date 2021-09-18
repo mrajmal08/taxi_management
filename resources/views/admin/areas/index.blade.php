@@ -29,7 +29,7 @@
                             {{ trans('cruds.areas.fields.name') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -46,18 +46,18 @@
                                 {{ $area->name ?? '' }}
                             </td>
                             <td>
-                              
+
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.areas.edit', $area->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
 
-                          
+
                                 <form action="{{ route('admin.areas.destroy', $area->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 

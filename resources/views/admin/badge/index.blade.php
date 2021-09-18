@@ -32,7 +32,7 @@
                             {{ trans('cruds.badges.fields.date') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -52,19 +52,19 @@
                                 {{ $badge->badge_renewal_date ?? '' }}
                             </td>
                             <td>
-                               
-  
-                               
+
+
+
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.badges.edit', $badge->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
-                                
+
                                 <form action="{{ route('admin.badges.destroy', $badge->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 

@@ -32,7 +32,7 @@
                           {{ trans('cruds.routes.fields.address') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -53,19 +53,19 @@
                             </td>
                             <td>
 
-                                
+
                                     <a class="btn btn-xs btn-info" href="{{ route('admin.routes.edit', $route->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
-                                
 
-                                
+
+
                                     <form action="{{ route('admin.routes.destroy', $route->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
-                                
+
 
                             </td>
 

@@ -38,7 +38,7 @@
                             {{ trans('cruds.drivers.fields.car') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>

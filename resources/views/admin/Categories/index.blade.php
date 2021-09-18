@@ -59,7 +59,7 @@
                             {{ trans('cruds.vehicle.fields.plate_issue_authority') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -95,7 +95,7 @@
                                 {{ $vehicle->vehicle_reg ?? '' }}
                             </td>
                             <td>
-                                 @if($vehicle->vehicle_reg_doc != null) 
+                                 @if($vehicle->vehicle_reg_doc != null)
                                 <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->vehicle_reg_doc)}}')">View</a>
                                 @else
                                  Not available
@@ -108,19 +108,19 @@
                                 {{ $vehicle->insurance_company_expiry ?? '' }}
                             </td>
                             <td>
-                                @if($vehicle->insurance_reg_doc != null) 
+                                @if($vehicle->insurance_reg_doc != null)
                                 <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->insurance_reg_doc)}}')">View</a>
                                 @else
                                  Not available
                                 @endif
                             </td>
                             <td>
-                                @if($vehicle->plate_issue_authority != null) 
+                                @if($vehicle->plate_issue_authority != null)
                                 <a href="#" onclick="show_my_file('{{asset("/storage/".$vehicle->plate_issue_authority)}}')">View</a>
                                 @else
                                  Not available
                                 @endif
-                                
+
                             </td>
                             <td>
                                <!--  @can('expense_category_show')
@@ -159,15 +159,15 @@
 @parent
 <script>
     function show_my_file(file) {
-         
+
          // open the page as popup //
          var page = file;
          var myWindow = window.open(page, "_blank", "scrollbars=yes,width=400,height=500,top=300");
-         
+
          // focus on the popup //
          myWindow.focus();
-         
-        
+
+
        }
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)

@@ -27,7 +27,7 @@
                         </th>
                         <th>
                             {{ trans('cruds.peoples.fields.name') }}
-                        </th> 
+                        </th>
                         <th>
                             {{ trans('cruds.peoples.fields.phone') }}
                         </th>
@@ -41,7 +41,7 @@
                             {{ trans('cruds.peoples.fields.area') }}
                         </th>
                         <th>
-                            &nbsp;
+                            &nbsp;Action
                         </th>
                     </tr>
                 </thead>
@@ -66,23 +66,23 @@
                             <td>
                               {{ $people->post_code ?? '' }}
                             </td>
-                            
+
                             <td>
                               {{$people['people']['name'] ?? ''}}
                             </td>
                             <td>
-                              
+
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.peoples.edit', $people->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
 
-                          
+
                                 <form action="{{ route('admin.peoples.destroy', $people->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                
+
 
                             </td>
 
