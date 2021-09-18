@@ -1,5 +1,18 @@
 <?php
 
+
+Route::get('/clear', function() {
+
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+
+    return "Cleared!";
+
+});
+
+
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
 Auth::routes();
@@ -25,7 +38,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Areas
     Route::delete('areas/destroy', 'AreaController@massDestroy')->name('areas.massDestroy');
-    Route::resource('areas', 'AreaController'); 
+    Route::resource('areas', 'AreaController');
 
     // Peoples
     Route::delete('peoples/destroy', 'PeopleController@massDestroy')->name('peoples.massDestroy');
@@ -77,7 +90,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('maintainers', 'MaintainersController');
     // Receipts
     Route::resource('receipts', 'ReceiptController');
-   
+
     Route::resource('driverreceipts', 'DriverReceiptController');
     Route::delete('driverreceipts/destroy', 'DriverReceiptController@massDestroy')->name('driverreceipts.massDestroy');
     Route::delete('receipts/destroy', 'ReceiptController@massDestroy')->name('receipts.massDestroy');
