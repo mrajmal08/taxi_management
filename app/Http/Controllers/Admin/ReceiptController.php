@@ -119,7 +119,6 @@ class ReceiptController extends Controller
     public function show($id)
     {
         $rec = Receipt::where('id',$id)->get();
-
         $data = DailyEntry::whereBetween('work_date',[$rec[0]['start_date'],$rec[0]['end_date']])->with(['contract','driver'])->where('driver_id',$rec[0]['driver_id'])->get();
 
         $total_paid = 0;
